@@ -1,0 +1,172 @@
+{
+  "models": [
+    {
+      "id": 1,
+      "model": "Tomy 5",
+      "category": {
+        "id": 1,
+        "name": "Urbano"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "model": "M10",
+      "category": {
+        "id": 1,
+        "name": "Casual"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "model": "N100",
+      "category": {
+        "id": 2,
+        "name": "Casual"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "model": "Famas",
+      "category": {
+        "id": 3,
+        "name": "Sport"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "model": "AA12",
+      "category": {
+        "id": 4,
+        "name": "Zapatillas"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "model": "Vector",
+      "category": {
+        "id": 5,
+        "name": "Botas"
+      },
+      "sizes": [
+        {
+          "id": 1,
+          "name": "Pequeño",
+          "size": "38-42",
+          "price": 70
+        },
+        {
+          "id": 2,
+          "name": "Mediano",
+          "size": "38-42",
+          "price": 80
+        },
+        {
+          "id": 3,
+          "name": "Grande",
+          "size": "38-42",
+          "price": 90
+        }
+      ]
+    }
+  ]
+}

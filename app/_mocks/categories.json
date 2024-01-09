@@ -1,0 +1,28 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Urbano"
+    },
+    {
+      "id": 2,
+      "name": "Casual"
+    },
+    {
+      "id": 3,
+      "name": "Sport"
+    },
+    {
+      "id": 4,
+      "name": "Zapatillas"
+    },
+    {
+      "id": 5,
+      "name": "Botas"
+    },
+    {
+      "id": 6,
+      "name": "Industrial"
+    }
+  ]
+}

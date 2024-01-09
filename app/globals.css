@@ -16,7 +16,7 @@
   }
 }
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,4 +24,23 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+.accordion-mobile {
+  padding-left: 0; 
+  gap: 0;
+}
+
+.accordion-mobile > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0!important;
+}
+
+.accordion-mobile button {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.accordion-mobile button span {
+  font-size: 14px!important;
 }

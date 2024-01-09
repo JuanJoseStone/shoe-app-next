@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ModalSizes from "../modals/ModalSizes"
-import {useDisclosure, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, AvatarIcon, Input, DropdownSection} from "@nextui-org/react";
-import {ChevronDown, Lock, Activity, Flash, Server, TagUser, Scale, AddNoteIcon, ListIcon} from "../Icons.js";
+import {useDisclosure, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, AvatarIcon, DropdownSection, Accordion, AccordionItem, Listbox, ListboxItem, Chip} from "@nextui-org/react";
+import {ChevronDown, Lock, Activity, Flash, Server, TagUser, Scale, AddNoteIcon, ListIcon} from "../../_utils/Icons.js";
 import ThemeSwitch from "../ThemeSwitch.js";
 
 export default function App() {
@@ -11,16 +10,106 @@ export default function App() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    {
+      label: "Tallas & Categorias",
+      items: [
+        {
+          module: "Tallas",
+          options: [
+            {
+              label: "Ver Tallas",
+              description: "Lista todas las tallas creadas",
+              href: "/tallas",
+            },
+            {
+              label: "Crear Talla",
+              description: "Puede crear una talla nueva",
+              href: "#",
+            },
+          ]
+        },
+        {
+          module: "Categorias",
+          options: [
+            {
+              label: "Ver Categorías",
+              description: "Lista todas las categorias creadas",
+              href: "/categorias",
+            },
+            {
+              label: "Crear Categoria",
+              description: "Puede crear una categoría nueva",
+              href: "#",
+            },
+          ]
+        }
+      ]
+    },
+    {
+      label: "Gestion de docenas",
+      items: [
+        {
+          module: "Docenas",
+          options: [
+            {
+              label: "Ver todas las docenas",
+              description: "Lista todas las categorias creadas",
+              href: "#",
+            },
+            {
+              label: "Registrar nueva docena",
+              description: "Puede realizar el registro de una neuva docena",
+              href: "#",
+            },
+            {
+              label: "Buscar Docena por Código",
+              description: "Buscar una docena por su código",
+              href: "#",
+            },
+          ]
+        },
+        {
+          module: "Estado de las docenas",
+          options: [
+            {
+              label: "Docenas para el aparado",
+              description: "Docenas para el aparador",
+              href: "#",
+            },
+            {
+              label: "Docenas para el armado",
+              description: "Docenas para el armador",
+              href: "#",
+            },
+            {
+              label: "Docenas para rematar",
+              description: "Docenas listas para rematar",
+              href: "#",
+            },
+          ]
+        }
+      ]
+    },
+    {
+      label: "Procesos",
+      items: [
+        {
+          module: "Proceso actual de las docenas",
+          options: [
+            {
+              label: "Proceso del aparado",
+              description: "Ver estado de las docenas",
+              href: "/tallas",
+            },
+            {
+              label: "Proceso del Armado",
+              description: "Ver estado de las docenas",
+              href: "#",
+            },
+          ]
+        }
+      ]
+    },
   ];
 
   const icons = {
@@ -74,278 +163,55 @@ export default function App() {
             <p className="font-bold text-inherit dark:text-gray-200">NIK FORT</p>
           </NavbarBrand>
           <NavbarItem>
-            <Link color="foreground" href="#" size="sm">
+            <Link color="foreground" href="/dashboard" size="sm">
               Dashboard
             </Link>
           </NavbarItem>
 
-          {/* <Dropdown backdrop="blur">
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Tallas
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              <DropdownItem
-                key="autoscaling"
-                description="ACME scales apps to meet user demand, automagically, based on load."
-                startContent={icons.scale}
+          {/* Menu Items */}
+          {menuItems.map(({label, items}, index) => (
+            <Dropdown key={index}>
+              <NavbarItem>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                    endContent={icons.chevron}
+                    radius="sm"
+                    variant="light"
+                  >
+                    {label}
+                  </Button>
+                </DropdownTrigger>
+              </NavbarItem>
+              <DropdownMenu
+                aria-label="ACME features"
+                className="w-[340px]"
+                itemClasses={{
+                  base: "gap-4",
+                }}
               >
-                Categorias
-              </DropdownItem>
-              <DropdownItem
-                key="usage_metrics"
-                description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
-                startContent={icons.activity}
-              >
-                Crear Categoria
-              </DropdownItem>
-              <DropdownItem
-                key="production_ready"
-                description="ACME runs on ACME, join us and others serving requests at web scale."
-                startContent={icons.flash}
-              >
-                Modelos
-              </DropdownItem>
-              <DropdownItem
-                key="99_uptime"
-                description="Applications stay on the grid with high availability and high uptime guarantees."
-                startContent={icons.server}
-              >
-                Crear Modelo
-              </DropdownItem>
-              <DropdownItem
-                key="supreme_support"
-                description="Overcome any challenge with a supporting team ready to respond."
-                startContent={icons.user}
-              >
-                +Supreme Support
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown> */}
-
-          {/* TALLAS & CATEGORIAS */}
-          <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Tallas & Categorías
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              <DropdownSection title="Tallas" showDivider>  
-                <DropdownItem
-                  key="autoscaling"
-                  description="Lista todas las tallas creadas"
-                  startContent={<ListIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Ver tallas
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una talla nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                  onPress={onOpen}
-                >
-                  Crear talla
-                </DropdownItem>
-              </DropdownSection>
-              <DropdownSection title="Categorias">  
-                <DropdownItem
-                  key="production_ready"
-                  description="Lista todas las categorias creadas"
-                  startContent={<ListIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                  Link="categorias"
-                >
-                  Ver Categorías
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Crear Categoria
-                </DropdownItem>
-              </DropdownSection>
-            </DropdownMenu>
-          </Dropdown>
-
-          {/* GESTION DE DOCENAS */}
-          <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Gestión de docenas
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              <DropdownSection title="Docenas" showDivider>  
-                <DropdownItem
-                  key="production_ready"
-                  description="Lista todas las categorias creadas"
-                  startContent={<ListIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Ver todas las docenas
-                </DropdownItem>
-                <DropdownItem
-                  key="autoscaling"
-                  description="Lista todas las tallas creadas"
-                  startContent={<ListIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Registrar nueva docena
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una talla nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Buscar Docena por Código
-                </DropdownItem>
-              </DropdownSection>
-              <DropdownSection title="Estado de las docenas">  
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Docenas para el aparado
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Docenas para el armado
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Docenas para rematar
-                </DropdownItem>
-              </DropdownSection>
-            </DropdownMenu>
-          </Dropdown>
-
-          {/* PROCESOS DE DOCENAS */}
-          <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                  endContent={icons.chevron}
-                  radius="sm"
-                  variant="light"
-                >
-                  Procesos
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="ACME features"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              <DropdownSection title="Proceso actual de las docenas">  
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Proceso del aparado
-                </DropdownItem>
-                <DropdownItem
-                  key="new"
-                  description="Puede crear una categoría nueva"
-                  startContent={<AddNoteIcon className={iconClasses} />}
-                  className="dark:text-gray-300"
-                >
-                  Proceso del Armado
-                </DropdownItem>
-              </DropdownSection>
-            </DropdownMenu>
-          </Dropdown>
+                {items.map(({module, options}, i) => (
+                  <DropdownSection title={module} showDivider key={i}>
+                    {options.map(({label, description, href}, key) => (
+                        <DropdownItem
+                          key={key}
+                          description={description}
+                          startContent={<ListIcon className={iconClasses} />}
+                          className="dark:text-gray-300 cursor-pointer"
+                          onClick={() => location.href = href}
+                        >
+                          {label}
+                        </DropdownItem>
+                    ))}
+                  </DropdownSection>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          ))}
         </NavbarContent>
 
         <NavbarContent as="div" justify="end">
-          {/* <NavbarItem className="hidden lg:flex">
-            <Link href="#">Login</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Button as={Link} color="warning" href="#" variant="flat">
-              Sign Up
-            </Button>
-          </NavbarItem> */}
-          {/* <Input
-            classNames={{
-              base: "max-w-full sm:max-w-[14rem] h-10",
-              mainWrapper: "h-full",
-              input: "text-small",
-              inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-            }}
-            placeholder="Type to search..."
-            size="sm"
-            startContent={<SearchIcon size={18} />}
-            type="search"
-          /> */}
-          {/* <button onClick={() => setTheme('light')}>Light Mode</button>
-          <button onClick={() => setTheme('dark')}>Dark Mode</button> */}
-
           <ThemeSwitch />
 
           <Dropdown placement="bottom-end">
@@ -367,11 +233,6 @@ export default function App() {
                 <p className="font-semibold">zoey@example.com</p>
               </DropdownItem>
               <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
               <DropdownItem key="logout" color="danger">
                 Log Out
               </DropdownItem>
@@ -379,25 +240,56 @@ export default function App() {
           </Dropdown>
         </NavbarContent>
 
-        <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className="w-full"
-                color={
-                  index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-                }
-                href="#"
-                size="sm"
-              >
-                {item}
-              </Link>
+        {/* Menu Mobile */}
+        <NavbarMenu className="py-6">
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              color="warning"
+              href="/dashboard"
+              size="sm"
+            >
+              Dashboard
+            </Link>
+          </NavbarMenuItem>
+          {menuItems.map(({label, items}, index) => (
+            <NavbarMenuItem key={index}>
+              <Accordion variant="splitted" className="accordion-mobile">
+                <AccordionItem key="1" aria-label="Accordion 1" title={label}>
+                {items.map(({module, options}, i) => (
+                  <div key={i} className="pl-2">
+                    <small className="text-xs text-gray-800 dark:text-gray-400">{module}</small>
+                    {options.map(({label, href}, key) => (
+                    <Link
+                      key={key}
+                      isBlock
+                      showAnchorIcon
+                      className="w-full text-sm text-gray-500 dark:text-gray-300"
+                      href={href}
+                      size="sm"
+                      color="foreground"
+                    >
+                      {label}
+                    </Link>
+                    ))}
+                  </div>
+                ))}
+                </AccordionItem>
+              </Accordion>
             </NavbarMenuItem>
           ))}
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              color="danger"
+              href="dashboard"
+              size="sm"
+            >
+              Cerrar Sesión
+            </Link>
+          </NavbarMenuItem>
         </NavbarMenu>
       </Navbar>
-
-      {/* <ModalSizes /> */}
     </>
   );
 }

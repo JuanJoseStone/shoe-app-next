@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Switch, VisuallyHidden, useSwitch } from "@nextui-org/react";
-import { MoonIcon, SunIcon } from "../_components/Icons";
+import { MoonIcon, SunIcon } from "../_utils/Icons";
 
 const ThemeSwitch = (props) => {
   const {
@@ -18,13 +18,15 @@ const ThemeSwitch = (props) => {
 
   useEffect(() => {
     setMounted(true)
+    changeTheme()
   }, [])
 
   function changeTheme() {
     if (isSelected) {
       setTheme('light')
     } else {
-      setTheme('dark')
+      setTheme('light')
+      // setTheme('dark')
     }
   }
 
